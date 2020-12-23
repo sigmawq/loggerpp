@@ -1,13 +1,8 @@
 // Tests
-
-#include <iostream>
-#define LOGGER_TO_COUT
-#include "logger.h"
-#include <memory>
+#include "tests.h"
 
 int main() {
-    logger log { "/home/swql/CLionProjects/logger/logs-server/"};
-    log.pushp("A", "B", 35);
-    log.push("HELLLL", "I AM SO TIRED");
+    t_basic_test();
+    t_insert_multiple();
     return 0;
 }

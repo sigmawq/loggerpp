@@ -26,16 +26,17 @@
 
 
 class logger {
+
     std::ofstream handle;
 
-    // Name will be log<current_date_and_time>.txt
+    // Spacefree changes all spaces to '-'
     static std::string get_timestamp(bool spacefree = false);
 
-    void create_new_log_file(std::filesystem::path& path);
+    void create_new_log_file(std::filesystem::path& path, std::string* optional_name);
 
-    void handle_provided_path(std::filesystem::path& path);
+    void handle_provided_path(std::filesystem::path& path, std::string* optional_path = nullptr);
 
-    void initialize(std::filesystem::path& path);
+    void initialize(std::filesystem::path& path, std::string* optional_name = nullptr);
 
     // Base case
     template<typename none = void>
@@ -53,13 +54,25 @@ class logger {
     }
 public:
 
-    logger(std::filesystem::path& path);
+    // Create log with default name in path
+    explicit logger(std::filesystem::path& path);
 
-    logger(std::string& path);
+    // Create log with default name in path
+    explicit logger(std::string& path);
 
-    logger(const char* path);
+    // Create log with default name in path
+    explicit logger(const char* path);
 
-    // Log file will be created in current directory
+    // Create log with custom name in path
+    explicit logger(std::filesystem::path& path, std::string& name);
+
+    // Create log with custom name in path
+    explicit logger(std::string& path, std::string& name);
+
+    // Create log with custom name in path
+    explicit logger(const char* path, std::string& name);
+
+    // Create log with default name in current directory
     logger();
 
     logger(const logger& other) = delete;
